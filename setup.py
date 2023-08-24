@@ -4,10 +4,10 @@ with open('README.md', 'r') as f:
     long_description = f.read()
 
 with open('requirements-repl.txt', 'r') as f:
-    requirements = f.readlines()
+    requirements = f.read().split('\n')
 
 setuptools.setup(
-    name='make_voices_louder_tg',
+    name='makeit',
     version='0.1.0',
     author='DandyDrop',
     description='Helps when you need to hear what somebody said in telegram voice note',
