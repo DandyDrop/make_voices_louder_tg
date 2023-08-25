@@ -5,7 +5,7 @@ from flask import Flask
 from dotenv import load_dotenv
 import pyrogram
 
-import functionality
+from .functionality import normalize_audio
 
 load_dotenv()
 
@@ -34,7 +34,7 @@ def do():
         file = await app.download_media(message, in_memory=True)
         await client.send_voice(
             'me',
-            voice=functionality.normalize_audio(bytes(file.getbuffer()))
+            voice=normalize_audio(bytes(file.getbuffer()))
         )
 
     app.run()
