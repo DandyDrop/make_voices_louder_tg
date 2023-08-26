@@ -2,15 +2,15 @@ import os
 from threading import Thread
 
 from flask import Flask
-from dotenv import load_dotenv
 import pyrogram
+from replit import Database
 
-from .functionality import normalize_audio
-
-load_dotenv()
+from functionality import normalize_audio
 
 flask_app = Flask(__name__)
 app: pyrogram.Client | None = None
+
+db = Database(os.environ['REPLIT_DB_URL'])
 
 
 def handle_awake():
@@ -24,7 +24,7 @@ def do():
 
     app = pyrogram.Client(
             'make_voices_louder_tg',
-            session_string=os.environ['TG_SESSION_STRING']
+            session_string=db['tg_session_string']
     )
 
     @app.on_message(pyrogram.filters.voice)
@@ -51,5 +51,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    do()
 

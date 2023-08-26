@@ -1,5 +1,5 @@
 pyrogram
 tgcrypto
-python-dotenv
 flask
 pydub
+replit
