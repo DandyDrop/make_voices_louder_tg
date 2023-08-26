@@ -5,7 +5,7 @@ from flask import Flask
 import pyrogram
 from replit import Database
 
-from functionality import normalize_audio
+from make_voices_louder_tg.functionality import normalize_audio
 
 flask_app = Flask(__name__)
 app: pyrogram.Client | None = None
@@ -51,5 +51,5 @@ def main():
 
 
 if __name__ == '__main__':
-    do()
+    main()
 
