@@ -5,7 +5,7 @@ from flask import Flask
 import pyrogram
 from replit import Database
 
-from make_voices_louder_tg.functionality import normalize_audio
+from functionality import normalize_audio
 
 flask_app = Flask(__name__)
 app: pyrogram.Client | None = None
@@ -27,11 +27,10 @@ def do():
             session_string=db['tg_session_string']
     )
 
-    @app.on_message(pyrogram.filters.voice)
-    async def me(client: pyrogram.Client, message: pyrogram.types.Message):
-        print(vars(message))
-        print(message.voice)
-        file = await app.download_media(message, in_memory=True)
+    @app.on_message(pyrogram.filters.voice & pyrogram.filters.private & pyrogram.filters.chat([1309387740]))
+    async def handle_normalize_audio(client: pyrogram.Client, m: pyrogram.types.Message):
+        await m.delete()
+        file = await client.download_media(m, in_memory=True)
         await client.send_voice(
             'me',
             voice=normalize_audio(bytes(file.getbuffer()))
